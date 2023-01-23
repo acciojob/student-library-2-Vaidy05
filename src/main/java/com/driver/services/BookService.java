@@ -21,12 +21,16 @@ public class BookService {
 
     public List<Book> getBooks(String genre, boolean available, String author){
 
-        List<Book> bookList = bookRepository2.findBooksByAuthor(author,available);//find the elements of the list by yourself
-        List<Book> books = new ArrayList<>();
-        for(Book book : bookList){
-            if(book.getGenre().toString()==genre)
-                books.add(book);
-        }
-        return books;
+        if(genre!=null && author!=null)
+            return bookRepository2.findBooksByGenreAuthor(genre, author, available);
+
+        else if(genre!=null)
+            return bookRepository2.findBooksByGenre(genre,available);
+
+        else if(author!=null)
+            return bookRepository2.findBooksByAuthor(author,available);
+
+        else
+            return bookRepository2.findByAvailability(available);
     }
 }
