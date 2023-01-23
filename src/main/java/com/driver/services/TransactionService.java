@@ -54,7 +54,7 @@ public class TransactionService {
         transaction.setCard(card);
         transaction.setIssueOperation(true);
 
-        if(!bookRepository5.findById(bookId).isPresent() || !bookRepository5.findById(bookId).get().isAvailable()){
+        if(book==null || !book.isAvailable()){
 
             transaction.setTransactionStatus(TransactionStatus.FAILED);
             bookRepository5.updateBook(book);
@@ -63,7 +63,7 @@ public class TransactionService {
         }
 
 
-        if(!cardRepository5.findById(cardId).isPresent() || (cardRepository5.findById(cardId).get().getCardStatus()!= CardStatus.ACTIVATED)){
+        if(card==null || card.getCardStatus().equals(CardStatus.DEACTIVATED)){
 
             transaction.setTransactionStatus(TransactionStatus.FAILED);
             bookRepository5.updateBook(book);
@@ -71,7 +71,7 @@ public class TransactionService {
             throw new Exception("Card is invalid");
         }
 
-        if(cardRepository5.findById(cardId).get().getBooks().size()>max_allowed_books){
+        if(card.getBooks().size()>=max_allowed_books){
 
             transaction.setTransactionStatus(TransactionStatus.FAILED);
             bookRepository5.updateBook(book);
