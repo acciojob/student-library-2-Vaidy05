@@ -1,5 +1,6 @@
 package com.driver.controller;
 
+import com.driver.models.Transaction;
 import com.driver.services.TransactionService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -19,7 +20,7 @@ public class TransactionController {
     @PostMapping("/issue_book")
     public ResponseEntity issueBook(@RequestParam("cardId") int cardId, @RequestParam("bookId") int bookId) throws Exception{
 
-        transactionService.issueBook(cardId,bookId);
+        String id = transactionService.issueBook(cardId,bookId);
         return new ResponseEntity<>("transaction completed", HttpStatus.ACCEPTED);
     }
 
@@ -27,7 +28,7 @@ public class TransactionController {
     @GetMapping("/return_book")
     public ResponseEntity returnBook(@RequestParam("cardId") int cardId, @RequestParam("bookId") int bookId) throws Exception{
 
-        transactionService.returnBook(cardId, bookId);
+        Transaction transaction = transactionService.returnBook(cardId, bookId);
         return new ResponseEntity<>("transaction completed", HttpStatus.ACCEPTED);
     }
 }

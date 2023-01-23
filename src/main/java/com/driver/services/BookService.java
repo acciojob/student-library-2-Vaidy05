@@ -21,16 +21,20 @@ public class BookService {
 
     public List<Book> getBooks(String genre, boolean available, String author){
 
-        if(genre != null && author != null)
+        if(genre != null && author != null) {
             return bookRepository2.findBooksByGenreAuthor(genre, author, available);
+        }
 
-        else if(genre != null)
-            return bookRepository2.findBooksByGenre(genre,available);
+        else if(genre != null) {
+            return bookRepository2.findBooksByGenre(genre, available);
+        }
 
-        else if(author != null)
-            return bookRepository2.findBooksByAuthor(author,available);
+        else if(author != null) {
+            return bookRepository2.findBooksByAuthor(author, available);
+        }
 
-        else
+        else {
             return bookRepository2.findByAvailability(available);
+        }
     }
 }

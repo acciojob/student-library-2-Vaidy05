@@ -88,7 +88,7 @@ public class TransactionService {
         book.setCard(card);
         book.setAvailable(false);
 
-        bookRepository5.save(book);
+        bookRepository5.updateBook(book);
         transactionRepository5.save(transaction);
 
        return transaction.getTransactionId(); //return transactionId instead
