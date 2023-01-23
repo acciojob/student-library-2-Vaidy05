@@ -18,6 +18,64 @@ public class Book {
     @Enumerated(EnumType.STRING)
     private Genre genre;
 
+    @ManyToOne
+    @JoinColumn
+    @JsonIgnoreProperties("booksWritten")
+    private Author author;
+
+    @ManyToOne
+    @JoinColumn
+    @JsonIgnoreProperties("books")
+    private Card card;
+
+
+    @Column(columnDefinition = "TINYINT(1)")
+    private boolean available;
+
+    @OneToMany(mappedBy = "book", cascade = CascadeType.ALL)
+    @JsonIgnoreProperties("book")
+    private List<Transaction> transactions;
+
+    public Book() {
+    }
+
+    public Book(String name, Genre genre, Author author, Card card, boolean available) {
+        this.name = name;
+        this.genre = genre;
+        this.author = author;
+        this.card = card;
+        this.available = available;
+    }
+
+    public Book(String name, Genre genre, Author author, Card card, boolean available, List<Transaction> transactions) {
+        this.name = name;
+        this.genre = genre;
+        this.author = author;
+        this.card = card;
+        this.available = available;
+        this.transactions = transactions;
+    }
+
+    public Book(String name, Genre genre, boolean available) {
+        this.name = name;
+        this.genre = genre;
+        this.available = available;
+    }
+
+    public Book(String name, Genre genre, Author author, boolean available) {
+        this.name = name;
+        this.genre = genre;
+        this.author = author;
+        this.available = available;
+    }
+
+    public Book(String name, Genre genre, Author author) {
+        this.name = name;
+        this.genre = genre;
+        this.author = author;
+        this.available=true;
+    }
+
     public int getId() {
         return id;
     }
@@ -73,38 +131,4 @@ public class Book {
     public void setTransactions(List<Transaction> transactions) {
         this.transactions = transactions;
     }
-
-    @ManyToOne
-    @JoinColumn
-    @JsonIgnoreProperties("booksWritten")
-    private Author author;
-
-    @ManyToOne
-    @JoinColumn
-    @JsonIgnoreProperties("books")
-    private Card card;
-
-
-    @Column(columnDefinition = "TINYINT(1)")
-    private boolean available;
-
-    @OneToMany(mappedBy = "book", cascade = CascadeType.ALL)
-    @JsonIgnoreProperties("book")
-    private List<Transaction> transactions;
-
-    public Book() {
-    }
-
-    public Book(String name, Genre genre, boolean available) {
-        this.name = name;
-        this.genre = genre;
-        this.available = available;
-    }
-
-    public Book(String name, Genre genre, Author author) {
-        this.name = name;
-        this.genre = genre;
-        this.author = author;
-    }
 }
-
