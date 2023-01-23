@@ -57,7 +57,6 @@ public class TransactionService {
         if(book==null || !book.isAvailable()){
 
             transaction.setTransactionStatus(TransactionStatus.FAILED);
-            bookRepository5.updateBook(book);
             transactionRepository5.save(transaction);
             throw new Exception("Book is either unavailable or not present");
         }

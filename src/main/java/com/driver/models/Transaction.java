@@ -21,6 +21,22 @@ public class Transaction {
     @JsonIgnoreProperties("books")
     private Card card;
 
+    public Transaction(int fineAmount, boolean isIssueOperation, TransactionStatus transactionStatus) {
+        this.fineAmount = fineAmount;
+        this.isIssueOperation = isIssueOperation;
+        this.transactionStatus = transactionStatus;
+    }
+
+    public Transaction(int fineAmount, boolean isIssueOperation, TransactionStatus transactionStatus, Date transactionDate) {
+        this.fineAmount = fineAmount;
+        this.isIssueOperation = isIssueOperation;
+        this.transactionStatus = transactionStatus;
+        this.transactionDate = transactionDate;
+    }
+
+    public Transaction() {
+    }
+
     @ManyToOne
     @JoinColumn
     @JsonIgnoreProperties("transactions")
